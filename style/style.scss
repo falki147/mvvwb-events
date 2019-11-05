@@ -1,0 +1,122 @@
+@import 'variables';
+
+.events {
+    display: table;
+    width: 100%;
+
+    .events-row {
+        display: table-row;
+        border-bottom: 1px solid #eee;
+
+        .events-cell {
+            display: table-cell;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+
+            &.title {
+                color: #db4a37;
+            }
+        }
+    }
+
+    @media only screen and (max-width: $breakpoint-tablet) {
+        .events-row {
+            display: block;
+
+            .events-cell {
+                display: block;
+                border: none;
+            }
+        }
+    }
+}
+
+.events-widget {
+    $spacing: $padding-side - 25px;
+    padding: 60px $spacing 40px $spacing;
+    display: flex;
+
+    .event {
+        position: relative;
+        flex-grow: 1;
+        flex-basis: 0;
+        margin-left: 25px;
+        margin-right: 25px;
+
+        .event-content {
+            padding-left: 75px;
+            height: 100%;
+
+            .event-title {
+                margin: 0 0 22px 0;
+                word-wrap: anywhere;
+                font-size: 28px;
+                line-height: 0.8;
+            }
+
+            .event-date {
+                position: absolute;
+                left: 0;
+                margin: 0;
+                color: #fff;
+                background: #db4a37;
+                width: 44px;
+                height: 44px;
+                padding-top: 3px;
+                text-align: center;
+                font-family: 'Raleway', Arial, sans-serif;
+                text-transform: uppercase;
+                font-size: 18px;
+                font-weight: 500;
+                line-height: 1.15;
+
+                span {
+                    display: block;
+                    font-size: 14px;
+                }
+            }
+
+            .event-date-mobile {
+                display: none;
+            }
+        }
+    }
+
+    @media only screen and (max-width: $breakpoint-tablet) {
+        padding: 20px 0;
+        display: block;
+
+        .event {
+            margin: 20px 0;
+
+            .event-content {
+                padding: 0 $padding-side;
+            }
+        }
+
+        .event-date {
+            display: none;
+        }
+    }
+
+    @media only screen and (max-width: $breakpoint-mobile) {
+        .event {
+            .event-content {
+                padding: 0 $padding-side-mobile;
+
+                .event-title {
+                    font-size: 24px;
+                    line-height: 1.2;
+                }
+
+                .event-date {
+                    display: none;
+                }
+
+                .event-date-mobile {
+                    display: inline;
+                }
+            }
+        }
+    }
+}
