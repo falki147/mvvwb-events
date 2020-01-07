@@ -32,7 +32,7 @@ class EventHelper {
     }
 
     public static function getEvents() {
-        $events = get_posts([ 'post_type' => 'event' ]);
+        $events = get_posts([ 'post_type' => 'event', 'numberposts' => -1 ]);
         $now = new \DateTime();
 
         foreach ($events as $i => $event) {
