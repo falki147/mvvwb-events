@@ -16,4 +16,4 @@
             </div>
         </article>
     <?php endforeach ?>
-</div>
+</article>
