@@ -25,7 +25,7 @@ class RegisterHelper {
      * Setup translations, scripts and post type
      */
     private static function setup() {
-        load_plugin_textdomain('mvvwb-events', false, MVVWB_EVENTS_TRANLATIONS);
+        load_plugin_textdomain('mvvwb-events', false, MVVWB_EVENTS_TRANSLATIONS);
 
         wp_register_style(
             'mvvwb-events',

@@ -23,12 +23,12 @@ if (!defined('MVVWB_EVENTS_ADMIN_VIEWS')) {
     define('MVVWB_EVENTS_ADMIN_VIEWS', implode(DIRECTORY_SEPARATOR, [ __DIR__, 'MVVWB', 'Events', 'Views', 'Admin', '' ]));
 }
 
-if (!defined('MVVWB_EVENTS_TRANLATIONS')) {
+if (!defined('MVVWB_EVENTS_TRANSLATIONS')) {
     $currentDir = str_replace('\\', '/', __DIR__);
     $wpDir = str_replace('\\', '/', WP_PLUGIN_DIR);
     
     /** Path to the translations. It can be directly passed to load_plugin_textdomain. */
-    define('MVVWB_EVENTS_TRANLATIONS', str_replace($wpDir, '', $currentDir));
+    define('MVVWB_EVENTS_TRANSLATIONS', str_replace($wpDir, '', $currentDir));
 }
 
 if (!defined('MVVWB_EVENTS_AUTOLOAD')) {
