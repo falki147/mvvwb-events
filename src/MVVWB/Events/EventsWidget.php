@@ -10,6 +10,8 @@ class EventsWidget extends \WP_Widget {
     }
 
     public function widget($args, $instance) {
+        wp_enqueue_style('mvvwb-events');
+
         $eventPosts = EventHelper::getEvents();
         $maxEvents = min(2, count($eventPosts));
         $events = [];

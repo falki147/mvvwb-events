@@ -13,6 +13,9 @@ class EventMetabox {
             'event',
             __('Event', 'mvvwb-events'),
             function ($post) {
+                wp_enqueue_style('mvvwb-events-admin');
+                wp_enqueue_script('mvvwb-events-admin');
+
                 $startdate = EventHelper::format(\DateTime::ISO8601 , EventHelper::getStartDate($post));
                 $dateformat = EventHelper::unstripQuotationMarks(EventHelper::getDateFormat($post));
                 $enddate = EventHelper::format(\DateTime::ISO8601 , EventHelper::getEndDate($post));

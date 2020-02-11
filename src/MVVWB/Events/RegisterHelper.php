@@ -3,7 +3,35 @@
 namespace MVVWB\Events;
 
 class RegisterHelper {
-    private static function init() {
+    public static function register() {
+        add_action('plugins_loaded', function () { self::setup(); });
+        add_action('widgets_init', function () { self::widgetsInit(); });
+        add_action('add_meta_boxes', function () { self::addMetaBoxes(); });
+        add_action('save_post', function ($postID) { self::saveMetaBoxes($postID); });
+    }
+
+    private static function setup() {
+        load_plugin_textdomain('mvvwb-events', false, MVVWB_EVENTS_TRANLATIONS);
+
+        wp_register_style(
+            'mvvwb-events',
+            MVVWB_EVENTS_BASE . 'style.css', [],
+            MVVWB_EVENTS_VERSION
+        );
+
+        wp_register_script(
+            'mvvwb-events-admin',
+            MVVWB_EVENTS_BASE . 'admin.js',
+            [ 'wp-blocks', 'wp-element', 'wp-data', 'jquery' ],
+            MVVWB_EVENTS_VERSION
+        );
+
+        wp_register_style(
+            'mvvwb-events-admin',
+            MVVWB_EVENTS_BASE . 'admin.css', [],
+            MVVWB_EVENTS_VERSION
+        );
+
         register_post_type('event', [
             'labels' => [
                 'name'          => __('Events', 'mvvwb-events'),
@@ -25,17 +53,11 @@ class RegisterHelper {
             'menu_icon'         => 'dashicons-calendar-alt'
         ]);
 
-        wp_register_script(
-            'mvvwb-events-admin-js',
-            MVVWB_EVENTS_BASE . 'admin.js',
-            [ 'wp-blocks', 'wp-element', 'wp-data', 'jquery' ]
-        );
-
-        wp_enqueue_style('mvvwb-events-style', MVVWB_EVENTS_BASE . 'style.css');
-
         register_block_type('mvvwb/events', [
-            'editor_script' => 'mvvwb-events-admin-js',
+            'editor_script' => 'mvvwb-events-admin',
             'render_callback' => function ($attributes, $content ) {
+                wp_enqueue_style('mvvwb-events');
+
                 $events = array_map(function ($event) {
                     return [
                         'event' => EventHelper::getStartDate($event),
@@ -60,23 +82,7 @@ class RegisterHelper {
         EventMetabox::addMetabox();
     }
 
-    private static function adminAddScripts() {
-        wp_enqueue_script('mvvwb-events-admin-js');
-        wp_enqueue_style('mvvwb-events-admin-css', MVVWB_EVENTS_BASE . 'admin.css', false, '1.0.0');
-    }
-
-
     private static function saveMetaBoxes($postID) {
         EventMetabox::saveMetabox($postID, $_POST);
-    }
-
-    public static function register() {
-        load_plugin_textdomain('mvvwb-events', false, MVVWB_EVENTS_TRANLATIONS);
-
-        add_action('init', function () { self::init(); });
-        add_action('widgets_init', function () { self::widgetsInit(); });
-        add_action('add_meta_boxes', function () { self::addMetaBoxes(); });
-        add_action('admin_enqueue_scripts', function () { self::adminAddScripts(); });
-        add_action('save_post', function ($postID) { self::saveMetaBoxes($postID); });
     }
 }
