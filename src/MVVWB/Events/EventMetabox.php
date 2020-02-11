@@ -1,4 +1,7 @@
 <?php
+/**
+ * Defines EventMetabox class
+ */
 
 namespace MVVWB\Events;
 

@@ -235,6 +235,9 @@ class EventHelper {
      * Converts escaped characters in PHP date format strings to enquoted strings
      *
      * e.g. '\\T\\e\\s\\t H:i' becomes '"Test" H:i', '"' becomes '""'
+     *
+     * @param string $str the unqoted string
+     * @return string the enquoted string
      */
     public static function unstripQuotationMarks($str) {
         return preg_replace_callback('/(\\\\.)+/', function ($matches) {
