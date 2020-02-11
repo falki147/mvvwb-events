@@ -1,14 +1,31 @@
 <?php
+/**
+ * Defines EventsWidget class
+ */
 
 namespace MVVWB\Events;
 
+/**
+ * Events widget which displays all the events
+ */
 class EventsWidget extends \WP_Widget {
+    /**
+     * Construct the widget with default values
+     */
     function __construct() {
         parent::__construct(
             'events-widget', __('Upcoming Events', 'mvvwb-events')
         );
     }
 
+    /**
+     * Render the widget
+     *
+     * The HTML code is written to the output buffer.
+     *
+     * @param string[] $args display arguments
+     * @param string[] $instance settings for the particular instance
+     */
     public function widget($args, $instance) {
         wp_enqueue_style('mvvwb-events');
 
@@ -30,13 +47,5 @@ class EventsWidget extends \WP_Widget {
             include MVVWB_EVENTS_VIEWS . 'EventsWidgetView.php';
 
         echo $args['after_widget'];
-    }
-
-    public function form($instance) {
-        echo '<p></p>';
-    }
-
-    public function upevent($newInstance, $oldInstance) {
-        return [];
     }
 }

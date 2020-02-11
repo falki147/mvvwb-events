@@ -1,4 +1,14 @@
-<div class="events" role="table" aria-label="<?=esc_attr__('Events', 'mvvwb-events')?>">
+<?php
+/**
+ * File which is used to render the events block HTML
+ *
+ * Following variables are passed to it:
+ * - $events: An array of the events containing date, title, content and additional text
+ */
+
+namespace MVVWB\Events\Views;
+
+?><div class="events" role="table" aria-label="<?=esc_attr__('Events', 'mvvwb-events')?>">
     <?php if (!$events): ?>
         <?=esc_html__('There are no up-to-event events.', 'mvvwb-events')?>
     <?php endif ?>

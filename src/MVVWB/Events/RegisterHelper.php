@@ -1,8 +1,19 @@
 <?php
+/**
+ * Defines RegisterHelper class
+ */
 
 namespace MVVWB\Events;
 
+/**
+ * Provides functionality for registering post types, scripts, etc.
+ *
+ * This class is not intended to be intantiated
+ */
 class RegisterHelper {
+    /**
+     * Register hooks for initializing plugin
+     */
     public static function register() {
         add_action('plugins_loaded', function () { self::setup(); });
         add_action('widgets_init', function () { self::widgetsInit(); });
@@ -10,6 +21,9 @@ class RegisterHelper {
         add_action('save_post', function ($postID) { self::saveMetaBoxes($postID); });
     }
 
+    /**
+     * Setup translations, scripts and post type
+     */
     private static function setup() {
         load_plugin_textdomain('mvvwb-events', false, MVVWB_EVENTS_TRANLATIONS);
 
@@ -60,7 +74,7 @@ class RegisterHelper {
 
                 $events = array_map(function ($event) {
                     return [
-                        'event' => EventHelper::getStartDate($event),
+                        'date' => EventHelper::getStartDate($event),
                         'title' => $event->post_title,
                         'content' => EventHelper::getFullString($event),
                         'additionalText' => EventHelper::getAdditionalText($event)
@@ -74,14 +88,28 @@ class RegisterHelper {
         ]);
     }
 
+    /**
+     * Register widgets
+     */
     private static function widgetsInit() {
         register_widget(new EventsWidget);
     }
 
+    /**
+     * Add metaboxes
+     */
     private static function addMetaBoxes() {
         EventMetabox::addMetabox();
     }
 
+    /**
+     * Save metaboxes
+     *
+     * This function will also be called even when the metabox itself isn't active. The data is
+     * taken from the $_POST variable.
+     *
+     * @param int $postID id of the post which was edited
+     */
     private static function saveMetaBoxes($postID) {
         EventMetabox::saveMetabox($postID, $_POST);
     }

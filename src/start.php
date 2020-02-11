@@ -1,26 +1,39 @@
 <?php
+/**
+ * Initializes base constants and sets up autoloading
+ */
 
-if (!defined('MVVWB_EVENTS_BASE'))
+if (!defined('MVVWB_EVENTS_BASE')) {
+    /** Base path of the template */
     define('MVVWB_EVENTS_BASE', plugin_dir_url(__FILE__));
+}
 
-if (!defined('MVVWB_EVENTS_VERSION'))
+if (!defined('MVVWB_EVENTS_VERSION')) {
+    /** Version of this template */
     define('MVVWB_EVENTS_VERSION', '1.0.0');
+}
 
-if (!defined('MVVWB_EVENTS_VIEWS'))
+if (!defined('MVVWB_EVENTS_VIEWS')) {
+    /** Absolute path to the views */
     define('MVVWB_EVENTS_VIEWS', implode(DIRECTORY_SEPARATOR, [ __DIR__, 'MVVWB', 'Events', 'Views', '' ]));
+}
 
-if (!defined('MVVWB_EVENTS_ADMIN_VIEWS'))
+if (!defined('MVVWB_EVENTS_ADMIN_VIEWS')) {
+    /** Absolute path to the admin views */
     define('MVVWB_EVENTS_ADMIN_VIEWS', implode(DIRECTORY_SEPARATOR, [ __DIR__, 'MVVWB', 'Events', 'Views', 'Admin', '' ]));
+}
 
 if (!defined('MVVWB_EVENTS_TRANLATIONS')) {
     $currentDir = str_replace('\\', '/', __DIR__);
     $wpDir = str_replace('\\', '/', WP_PLUGIN_DIR);
     
+    /** Path to the translations. It can be directly passed to load_plugin_textdomain. */
     define('MVVWB_EVENTS_TRANLATIONS', str_replace($wpDir, '', $currentDir));
 }
 
 if (!defined('MVVWB_EVENTS_AUTOLOAD')) {
     spl_autoload_register(function ($class) {
+        // Only load classes from the "MVVWB" namespace
         if (strncmp('MVVWB', $class, 5) !== 0)
             return false;
 
@@ -38,5 +51,9 @@ if (!defined('MVVWB_EVENTS_AUTOLOAD')) {
         return false;
     });
 
+    /**
+     * Helper constant to determine if the autloading was set up or not
+     * @internal
+     */
     define('MVVWB_EVENTS_AUTOLOAD', '1');
 }
