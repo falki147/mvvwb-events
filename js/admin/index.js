@@ -2,6 +2,11 @@ require("daterangepicker");
 var moment = require("moment");
 require("moment-timezone");
 
+/**
+ * Initializes the datepicker for a text input field
+ * @param {HTMLElement} element
+ * @param {HTMLElement} dataElement the element where the initial data is taken from
+ */
 function initializeDatePicker(element, dataElement) {
     jQuery(element).daterangepicker({
         startDate: moment.tz(dataElement.value, dataElement.getAttribute("data-timezone")),
@@ -44,6 +49,9 @@ function initializeDatePicker(element, dataElement) {
     });
 }
 
+/**
+ * Initializes all fields with datepickers which have the mvvwb-events-datepicker class set
+ */
 function initializeAllDatePickers() {
     document.addEventListener("DOMContentLoaded", function() {
         var datepicker = document.getElementsByClassName("mvvwb-events-datepicker");
@@ -60,6 +68,12 @@ function initializeAllDatePickers() {
     });
 }
 
+/**
+ * Initializes the event block in the editor
+ * @param {*} blocks 
+ * @param {*} element 
+ * @param {*} components 
+ */
 function initializeBlock(blocks, element, components) {
     blocks.registerBlockType("mvvwb/events", {
         title: "Events",
