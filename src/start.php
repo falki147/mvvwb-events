@@ -10,7 +10,7 @@ if (!defined('MVVWB_EVENTS_BASE')) {
 
 if (!defined('MVVWB_EVENTS_VERSION')) {
     /** Version of this template */
-    define('MVVWB_EVENTS_VERSION', '1.0.0');
+    define('MVVWB_EVENTS_VERSION', '{{version}}');
 }
 
 if (!defined('MVVWB_EVENTS_VIEWS')) {

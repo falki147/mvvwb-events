@@ -5,7 +5,7 @@
 /**
  * Plugin Name: MVVWB-Events
  * Description: Plugin, which allows the user to create and display events.
- * Version: 1.0.0
+ * Version: {{version}}
  * Author: Florian Preinfalk
  * Author URI: http://www.preinfalk.co.at
  */

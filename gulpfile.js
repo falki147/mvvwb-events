@@ -6,9 +6,11 @@ const concat = require("gulp-concat");
 const gettextParser = require("gettext-parser");
 const minifyCSS = require("gulp-csso");
 const minimist = require("minimist");
+const package = require("./package.json");
 const path = require("path");
 const postcss = require("gulp-postcss");
 const rename = require('gulp-rename');
+const replace = require("gulp-replace");
 const sass = require("gulp-sass");
 const source = require("vinyl-source-stream");
 const sourcemaps = require("gulp-sourcemaps");
@@ -99,6 +101,7 @@ function jsAdmin() {
 
 function php() {
     return src(phpSources)
+        .pipe(replace("{{version}}", package.version))
         .pipe(dest(destDir));
 }
 
