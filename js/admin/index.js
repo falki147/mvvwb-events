@@ -62,8 +62,8 @@ function initializeAllDatePickers() {
 
 function initializeBlock(blocks, element, components) {
     blocks.registerBlockType("mvvwb/events", {
-        title: "Example: last post",
-        icon: "megaphone",
+        title: "Events",
+        icon: "calendar",
         category: "widgets",
         edit: function(props) {
             return element.createElement(components.ServerSideRender, {
