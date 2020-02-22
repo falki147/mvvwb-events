@@ -19,6 +19,8 @@ class RegisterHelper {
         add_action('widgets_init', function () { self::widgetsInit(); });
         add_action('add_meta_boxes', function () { self::addMetaBoxes(); });
         add_action('save_post', function ($postID) { self::saveMetaBoxes($postID); });
+        add_action('wp_enqueue_scripts', function () { self::registerScripts(); });
+        add_action('admin_enqueue_scripts', function () { self::registerAdminScripts(); });
     }
 
     /**
@@ -26,25 +28,6 @@ class RegisterHelper {
      */
     private static function setup() {
         load_plugin_textdomain('mvvwb-events', false, MVVWB_EVENTS_TRANSLATIONS);
-
-        wp_register_style(
-            'mvvwb-events',
-            MVVWB_EVENTS_BASE . 'style.css', [],
-            MVVWB_EVENTS_VERSION
-        );
-
-        wp_register_script(
-            'mvvwb-events-admin',
-            MVVWB_EVENTS_BASE . 'admin.js',
-            [ 'wp-blocks', 'wp-element', 'wp-data', 'jquery' ],
-            MVVWB_EVENTS_VERSION
-        );
-
-        wp_register_style(
-            'mvvwb-events-admin',
-            MVVWB_EVENTS_BASE . 'admin.css', [],
-            MVVWB_EVENTS_VERSION
-        );
 
         register_post_type('event', [
             'labels' => [
@@ -86,6 +69,35 @@ class RegisterHelper {
                 return ob_get_clean();
             }
         ]);
+    }
+
+    /**
+     * Register general styles and scripts
+     */
+    private static function registerScripts() {
+        wp_register_style(
+            'mvvwb-events',
+            MVVWB_EVENTS_BASE . 'style.css', [],
+            MVVWB_EVENTS_VERSION
+        );
+    }
+
+    /**
+     * Register admin styles and scripts
+     */
+    private static function registerAdminScripts() {
+        wp_register_script(
+            'mvvwb-events-admin',
+            MVVWB_EVENTS_BASE . 'admin.js',
+            [ 'wp-blocks', 'wp-element', 'wp-data', 'jquery' ],
+            MVVWB_EVENTS_VERSION
+        );
+
+        wp_register_style(
+            'mvvwb-events-admin',
+            MVVWB_EVENTS_BASE . 'admin.css', [],
+            MVVWB_EVENTS_VERSION
+        );
     }
 
     /**
