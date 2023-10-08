@@ -16,7 +16,7 @@ use MVVWB\Events\EventHelper;
             <div class="event-content">
                 <time class="event-date"
                       datetime="<?=esc_attr(EventHelper::format('Y-m-d', $event['date']))?>">
-                    <?=EventHelper::format('j<\\sp\\a\\n>M</\\sp\\a\\n>', $event['date'])?>
+                    <?=EventHelper::format('j<\\s\\p\\a\\n>M</\\s\\p\\a\\n>', $event['date'])?>
                 </time>
                 <h2 class="event-title"><?=$event['title']?></h2>
                 <div class="events-data">
